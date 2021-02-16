@@ -1,7 +1,10 @@
-
-
-name: CI
-
+name: CI-CD-to-AWS
+# прописываю env
+env:
+  envirement_name: "react-app-env"
+  deploy_package_name: "react_app_${{ github.sha }}"
+  aws_region_name: "eu-north-1"
+# Запустить PUSH и PULL запрос для главнй ветки (при изменении главной ветки будет запускатся)
 on:
   push:
     branches: [ main ]
@@ -13,7 +16,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.15.4 
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
