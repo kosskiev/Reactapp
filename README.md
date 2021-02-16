@@ -1,5 +1,5 @@
-
-<img src="https://github.com/kosskiev/Reactapp/actions?query=workflow%3ACI-CD-to-AWS" alt="subfolders example" style="max-width:100%;">
+Status of last test:<br>
+<img src="https://github.com/kosskiev/Reactapp/workflows/CI-CD-to-AWS/badge.svg?branch=master">
 # The task
 
 Your task:
