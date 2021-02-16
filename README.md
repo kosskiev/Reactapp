@@ -25,7 +25,6 @@ Environment setup (recommended versions):
 
 * Commands for testing and building are listed below
 
-https://github.com/kosskiev/Reactapp/workflows/main/badge.svg?branch=master
 
 # Commands
 
