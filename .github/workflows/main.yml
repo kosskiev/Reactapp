@@ -27,7 +27,7 @@ jobs:
       - name: Use npm
         run : npm install
       - run : npm --version
-      - run : yarn start  
+      - run : yarn build  
+      - run : yarn start
       - run : yarn test
-      - run : yarn build
 
