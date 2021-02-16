@@ -23,6 +23,8 @@ Environment setup (recommended versions):
 
 * Commands for testing and building are listed below
 
+https://github.com/kosskiev/Reactapp/workflows/main/badge.svg?branch=master
+
 # Commands
 
 ### `npm install`
@@ -56,4 +58,4 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-# Reactapp
+
