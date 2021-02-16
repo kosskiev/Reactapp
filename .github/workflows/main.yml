@@ -25,7 +25,9 @@ jobs:
           node-version: 14.15.4 
  # установка npm
       - name: Use npm
-        run : npm install
+        uses : actions/setup-npm@v2
+        with:
+          npm-version: 6.14.10
       - run : npm --version
       - run : yarn start  
       - run : yarn test
