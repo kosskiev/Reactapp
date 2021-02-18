@@ -16,6 +16,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '14.15.4'
+    - run: npm install -g yarn
     
     - name: Setup key
       run : set -eu
@@ -26,7 +27,8 @@ jobs:
     - name: Install npm dependencies 
       run : npm install
     - name: Run build task
-      run : npm run build --if-present     
+      run : yarn test -- --watchAll=false
+    - run : yarn build
       
-    - name: Deploy to Server
-      run : rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyCheking=no" --archive --compress --delete .root@devops-test-ubuntu-1vcpu-2gb-fra1-01:/var/www/html/site/
+   # - name: Deploy to Server
+    #  run : rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyCheking=no" --archive --compress --delete .root@devops-test-ubuntu-1vcpu-2gb-fra1-01:/var/www/html/site/
