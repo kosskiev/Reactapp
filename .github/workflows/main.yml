@@ -16,21 +16,17 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '14.15.4'
-    - name: Install npm dependencies 
-      run: npm install
-    - name: Run build task
-      run: npm run build --if-present
-    - run: yarn start
-    - run: yarn test -- --watchAll=false
     
+    - name: Setup key
+      run : set -eu
+    - run : mkdir "`$HOME/.ssh"
+    - run : echo "${{ secrets.SERVER_KEY }}" > "$HOME/.ssh/key"
+    - run : chmod 600 "$HOME/.ssh/key"
+    
+    - name: Install npm dependencies 
+      run : npm install
+    - name: Run build task
+      run : npm run build --if-present     
       
     - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@v2.1.5
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "/var/www/html/site/"
-          REMOTE_HOST: ${{ secrets.IP_SERVER }}
-          REMOTE_USER: ${{ secrets.USER_SERVER_NAME }}
-          #TARGET: ${{ secrets.REMOTE_TARGET }}
-
+      run : cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyCheking=no" --archive --compress --delete .root@devops-test-ubuntu-1vcpu-2gb-fra1-01:/var/www/html/site/
