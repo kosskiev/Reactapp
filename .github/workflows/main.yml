@@ -29,4 +29,4 @@ jobs:
       run : npm run build --if-present     
       
     - name: Deploy to Server
-      run : cd dist && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyCheking=no" --archive --compress --delete .root@devops-test-ubuntu-1vcpu-2gb-fra1-01:/var/www/html/site/
+      run : rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyCheking=no" --archive --compress --delete .root@devops-test-ubuntu-1vcpu-2gb-fra1-01:/var/www/html/site/
