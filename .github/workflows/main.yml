@@ -1,8 +1,7 @@
-name: CI-CD-to-AWS
+name: CI-CD
 # прописываю env
 env:
   envirement_name: "react-app-env"
-  deploy_package_name: "react_app_${{ github.sha }}"
   aws_region_name: "eu-north-1"
 # Запустить PUSH и PULL запрос для главнй ветки (при изменении главной ветки будет запускатся)
 on:
@@ -18,18 +17,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
- # # установка нужной версии nodejs       
+ # установка нужной версии nodejs       
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14.15.4 
- # # установка npm
+ # установка npm
       - name: Use npm
         run : npm install
+        
+ # 
       
-      - name: Configure my AWS Cridentials # запускаю скрипт который конфигурирует AWS Credentials 
-        uses: aws-actions/configure-aws-credentials@v1
-        with: # теперь нужно ввести ACCESS KEY и SECRET KEY (создавали на вкладке Settings (Secrets)в репозитории , сами ключи генерируются на AWS IAM с правами доступа) 
-          aws-access-key-id     : ${{ secrets.ACCESS_KEY_ID }}
-          aws-secret-access-key : ${{ secrets.SECRET_ACCESS_KEY }} 
-          aws-region            : ${{ env.aws_region_name }}
+
