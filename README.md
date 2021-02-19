@@ -1,5 +1,5 @@
-Status of last test:<br>
-<img src="https://github.com/kosskiev/Reactapp/workflows/CI-CD-to-AWS/badge.svg?branch=master">
+#Status of last test:<br>
+#<img src="https://github.com/kosskiev/Reactapp/workflows/CI-CD-to-AWS/badge.svg?branch=master">
 # The task
 
 Your task:
