@@ -20,21 +20,19 @@ jobs:
       run : set -eu
     - run : mkdir "$HOME/.ssh"
     - run : echo "${{ secrets.SERVER_KEY }}" > "$HOME/.ssh/key"
-    - run : chmod 600 "$HOME/.ssh/key"
+    - run : chmod 600 "$HOME/.ssh/key" # доступ к ключу
     
     - name: Install npm dependencies 
-      run : npm install
-    - name: Run build task
-      run : yarn test -- --watchAll=false
-    - run : yarn build
+      run : npm install # Установка всех зависимостей, перечисленных в package.json
+    - run : yarn start # Запускает приложение в режиме разработки. http://localhost:3000
+    - run : yarn test -- --watchAll=false # запуска тестов в неинтерактивном режиме
+    - run : yarn build # Создает приложение для производства в build папке
       
-    - name: Deploy to Server
+    - name: Deploy to Server # отправка на сервер
       uses: easingthemes/ssh-deploy@v2.1.5
       env :
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
-          REMOTE_HOST    : ${{ secrets.IP_SERVER }}
-          REMOTE_USER    : ${{ secrets.USER_SERVER_NAME }}
-          #SOURCE         : "/home/runner/work/Reactapp/Reactapp/"
-          TARGET         : "/var/www/html/site/"
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }} # ключ
+          REMOTE_HOST    : ${{ secrets.IP_SERVER }} # домен или ip
+          REMOTE_USER    : ${{ secrets.USER_SERVER_NAME }} # имя пользователя(root или другое)
+          TARGET         : "/var/www/html/site/" # нужная директория на сервере
 
-          #WORK_DIRECTORY : /var/www/html/site/build
