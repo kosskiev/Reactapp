@@ -34,5 +34,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
           REMOTE_HOST    : ${{ secrets.IP_SERVER }}
           REMOTE_USER    : ${{ secrets.USER_SERVER_NAME }}
-          SOURCE         : "/var/www/html/site/"
+          SOURCE         : "/home/runner/work/Reactapp/Reactapp/"
+          TARGET         : "/var/www/html/site/"
+
           #WORK_DIRECTORY : /var/www/html/site/build
