@@ -34,5 +34,5 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }} # ключ
           REMOTE_HOST    : ${{ secrets.IP_SERVER }} # домен или ip
           REMOTE_USER    : ${{ secrets.USER_SERVER_NAME }} # имя пользователя(root или другое)
-          TARGET         : "/var/www/html/site/" # нужная директория на сервере
+          TARGET         : "/var/www/site/" # нужная директория на сервере
 
