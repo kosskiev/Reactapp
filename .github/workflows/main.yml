@@ -3,22 +3,20 @@ name: CI-CD
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  
+
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Install Node.js # ставлю нужную версию Nodejs
+    - name: Install Node.js # ставлю нужную версию Nodejs npm тоже станет
       uses: actions/setup-node@v1
       with:
         node-version: '14.15.4'
-    - run: npm install -g yarn
+    - run: npm install -g yarn # последняя глобальная версия yarn
     
-    - name: Setup key
+    - name: Setup key # перемещаю ключ для доступа на сервер
       run : set -eu
     - run : mkdir "$HOME/.ssh"
     - run : echo "${{ secrets.SERVER_KEY }}" > "$HOME/.ssh/key"
@@ -30,5 +28,9 @@ jobs:
       run : yarn test -- --watchAll=false
     - run : yarn build
       
-   # - name: Deploy to Server
-    #  run : rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyCheking=no" --archive --compress --delete .root@devops-test-ubuntu-1vcpu-2gb-fra1-01:/var/www/html/site/
+    - name: Deploy to Server
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
+          REMOTE_HOST: ${{ secrets.IP_SERVER }}
+          REMOTE_USER: ${{ secrets.USER_SERVER_NAME }}
