@@ -1,5 +1,5 @@
 name: CI-CD
-# Запустить PUSH и PULL запрос для главнй ветки (при изменении главной ветки будет запускатся)
+# Запустить PUSH запрос для главнй ветки (при изменении главной ветки будет запускатся)
 on:
   push:
     branches: [ main ]
@@ -14,7 +14,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '14.15.4'
-    - run: npm install -g yarn # последняя глобальная версия yarn
+    - run : npm install -g yarn # последняя глобальная версия yarn
     
     - name: Setup key # перемещаю ключ для доступа на сервер
       run : set -eu
@@ -30,7 +30,8 @@ jobs:
       
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@v2.1.5
-      env:
+      env :
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
-          REMOTE_HOST: ${{ secrets.IP_SERVER }}
-          REMOTE_USER: ${{ secrets.USER_SERVER_NAME }}
+          REMOTE_HOST    : ${{ secrets.IP_SERVER }}
+          REMOTE_USER    : ${{ secrets.USER_SERVER_NAME }}
+          TARGET         : ${{ secrets.REMOTE_TARGET }}
