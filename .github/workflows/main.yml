@@ -24,7 +24,7 @@ jobs:
     
     - name: Install npm dependencies 
       run : npm install # Установка всех зависимостей, перечисленных в package.json
-    - run : yarn start # Запускает приложение в режиме разработки. http://localhost:3000
+    - run : yarn start& # Запускает приложение в режиме разработки. http://localhost:3000
     - run : yarn test -- --watchAll=false # запуска тестов в неинтерактивном режиме
     - run : yarn build # Создает приложение для производства в build папке
       
